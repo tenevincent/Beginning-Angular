@@ -1,68 +1,69 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFirestoreDocument, AngularFirestore } from 'angularfire2/firestore';
-import { Observable } from 'rxjs';
-import { ActivatedRoute, Router } from '@angular/router';
-import { User } from '../user';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router, ActivatedRoute } from '@angular/router';
+import { AngularFirestore, AngularFirestoreDocument } from 'angularfire2/firestore';
 
+import { User } from '../user';
+import { Observable } from 'rxjs';
 
 
 
 @Component({
-  selector: 'app-user-form',
-  templateUrl: './user-form.component.html',
-  styleUrls: ['./user-form.component.scss']
+    selector: 'app-user-form',
+    templateUrl: './user-form.component.html',
+    styleUrls: ['./user-form.component.scss']
 })
 export class UserFormComponent implements OnInit {
 
     id;
-    form: FormGroup;  
+    form: FormGroup;
     title: string;
-    user = new User();    
+    user = new User();
 
     userDoc: AngularFirestoreDocument<User>;
-    singleUser: Observable<User>;      
+    singleUser: Observable<User>;
 
-    constructor(fb: FormBuilder, private _router:Router, private _route:ActivatedRoute, private afs: AngularFirestore){        
+    constructor(fb: FormBuilder, private _router: Router, private _route: ActivatedRoute,
+        private afs: AngularFirestore) {
         this.form = fb.group({
-            username:['',Validators.required ],
-            email:['',Validators.required]            
-        })                
+            username: ['', Validators.required],
+            email: ['', Validators.required]
+        })
     }
 
-    ngOnInit(){
+    ngOnInit() {
         this._route.params.subscribe(params => {
-            this.id = params["id"];            
-        });      
-                
-        if(!this.id){
-            this.title = "New User";            
-        }
-        else{
-            this.title = "Edit User";                        
-            this.userDoc = this.afs.doc('users/'+this.id);            
-            this.singleUser = this.userDoc.valueChanges();
-            this.singleUser.subscribe((user) =>{
-                this.form.get('username').setValue(user.name);                
-                this.form.get('email').setValue(user.email);                                
-            });            
-        }        
-    }    
+            this.id = params["id"];
+        });
 
-    submit(){                        
-        if (this.id) {   
-            this.afs.doc('users/'+this.id).update({
-                name: this.user.name,	
-                email: this.user.email  
-            });   ;                                                       
+        if (!this.id) {
+            this.title = "New User";
         }
-        else{            
+        else {
+            this.title = "Edit User";
+            this.userDoc = this.afs.doc('users/' + this.id);
+            this.singleUser = this.userDoc.valueChanges();
+            this.singleUser.subscribe((user) => {
+                this.form.get('username').setValue(user.name);
+                this.form.get('email').setValue(user.email);
+            });
+        }
+    }
+
+    submit() {
+        if (this.id) {
+            this.afs.doc('users/' + this.id).update({
+                name: this.user.name,
+                email: this.user.email
+            });;
+        }
+        else {
             this.afs.collection('users').add({
-                name: this.user.name,	
-                email: this.user.email  
-            });                         
+                name: this.user.name,
+                email: this.user.email
+            });
         }
-                                    
+
         this._router.navigate(['']);
-    } 
+    }
 }

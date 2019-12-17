@@ -1,4 +1,4 @@
-import { Component } from '@angular/core'; 
+import { Component } from '@angular/core';
 import { AngularFirestore } from 'angularfire2/firestore';
 
 @Component({
@@ -7,11 +7,10 @@ import { AngularFirestore } from 'angularfire2/firestore';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'chapter12';
-
+  title = 'Chapter12';
   constructor(private afs : AngularFirestore){
+    console.log( "this is the angular firebase: " + afs);
 
+    console.log(afs);
   }
-
-
 }

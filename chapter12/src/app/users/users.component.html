@@ -1,3 +1,5 @@
+
+
 <h1>Users</h1>
 <button class="btn btn-primary" (click)="add()">Add</button>
 <table class="table table-bordered">
@@ -15,13 +17,14 @@
 			<td>{{ user.data.email }}</td>
 			<td>                
                 <a [routerLink]="['/add', user.id]">
-                    <i class="glyphicon glyphicon-edit"></i>
+                    <i class="far fa-edit"></i>
+                    Edit
                 </a>
-
 			</td>
 			<td>
-                <a>
-                    <i (click)="delete(user.id,user.data.name)" class="glyphicon glyphicon-remove"></i>
+                <a class="text-danger">
+                    <i (click)="delete(user.id,user.data.name)" class="far fa-trash-alt"></i>
+                    Delete
                 </a>
             </td>
 		</tr>
