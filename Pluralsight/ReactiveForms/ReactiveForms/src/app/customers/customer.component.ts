@@ -57,6 +57,7 @@ export class CustomerComponent implements OnInit {
     ).subscribe(
       value => this.setMessage(emailControl)
     );
+ 
   }
 
   addAddress(): void {
