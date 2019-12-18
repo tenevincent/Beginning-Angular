@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { AngularFirestore } from 'angularfire2/firestore';
+import { Observable } from 'rxjs';
+import { LoginService } from './login.service';
 
 @Component({
   selector: 'app-root',
@@ -7,10 +9,20 @@ import { AngularFirestore } from 'angularfire2/firestore';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'Chapter12';
-  constructor(private afs : AngularFirestore){
-    console.log( "this is the angular firebase: " + afs);
 
-    console.log(afs);
+  isLoggedIn: Observable<boolean>;
+
+  constructor(private loginService: LoginService){    
   }
+
+  ngOnInit(){
+    this.loginService.getCurrentUser();
+    this.isLoggedIn = this.loginService.isLoggedIn;        
+  }
+
+  onLogout(){
+    this.loginService.logout();
+  }
+
+
 }
