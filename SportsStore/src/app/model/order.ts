@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { CartService } from './cart';
 
 @Injectable()
-export class Order {
+export class OrderService {
     public id: number;
     public name: string;
     public address: string;

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Product } from './product';
-import { StaticDataSource } from './static-data-source';
+import { StaticDataSourceService } from './static-data-source';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +9,7 @@ export class ProductRepository {
   private products: Product[] = [];
   private categories: string[] = [];
 
-  constructor(private dataSource: StaticDataSource) {
+  constructor(private dataSource: StaticDataSourceService) {
       dataSource.getProducts().subscribe(data => {
           this.products = data;
           this.categories = data.map(p => p.category)

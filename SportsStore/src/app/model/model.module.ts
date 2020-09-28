@@ -2,12 +2,17 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { CartService } from './cart';
-import { Order } from './order';
+import { OrderService } from './order';
 import { OrderRepository } from './order-repository';
 import { ProductRepository } from './product.service';
-import { RestDataSource } from './rest.datasource';
-import { StaticDataSource } from './static-data-source';
+import { RestDataSourceService } from './rest.datasource';
+import { StaticDataSourceService } from './static-data-source';
  
+
+
+
+
+
 
 
 @NgModule({
@@ -15,6 +20,6 @@ import { StaticDataSource } from './static-data-source';
   imports: [
     CommonModule, HttpClientModule
   ]
-  ,providers :  [ProductRepository, StaticDataSource, CartService, Order, OrderRepository, { provide: StaticDataSource, useClass: RestDataSource }]
+  ,providers :  [ProductRepository, StaticDataSourceService, CartService, OrderService, OrderRepository, { provide: StaticDataSourceService, useClass: RestDataSourceService }]
 })
 export class ModelModule { }
