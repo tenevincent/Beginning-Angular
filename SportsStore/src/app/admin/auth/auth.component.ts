@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { Router } from '@angular/router'; 
+import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { AuthService } from '../../model/auth.service';
 
 
 @Component({
@@ -11,8 +12,7 @@ import { FormsModule } from '@angular/forms';
 })
 export class AuthComponent implements OnInit {
 
-  constructor(private router: Router) { }
-
+  constructor(private router: Router, private auth: AuthService) { }
   ngOnInit(): void {
   }
 
@@ -21,14 +21,25 @@ export class AuthComponent implements OnInit {
   public errorMessage: string;
 
 
+
   authenticate(form: NgForm) {
     if (form.valid) {
-      // perform authentication
-      this.router.navigateByUrl("/admin/main");
+      this.auth.authenticate(this.username, this.password)
+        .subscribe(response => {
+         
+
+          if (response) {
+            console.log("response back: "+ response);
+            this.router.navigateByUrl("/admin/main");
+          }
+          this.errorMessage = "Authentication Failed";
+        })
     } else {
       this.errorMessage = "Form Data Invalid";
     }
   }
+
+
 
 
 }

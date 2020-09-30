@@ -7,7 +7,8 @@ import { OrderRepository } from './order-repository';
 import { ProductRepository } from './product.service';
 import { RestDataSourceService } from './rest.datasource';
 import { StaticDataSourceService } from './static-data-source';
- 
+import {AuthService} from './auth.service';
+
 
 
 
@@ -17,9 +18,9 @@ import { StaticDataSourceService } from './static-data-source';
 
 @NgModule({
   declarations: [],
-  imports: [
-    CommonModule, HttpClientModule
-  ]
-  ,providers :  [ProductRepository, StaticDataSourceService, CartService, OrderService, OrderRepository, { provide: StaticDataSourceService, useClass: RestDataSourceService }]
+  imports: [CommonModule, HttpClientModule]
+  ,providers :  [ProductRepository, StaticDataSourceService, CartService, OrderService, OrderRepository, 
+    { provide: StaticDataSourceService, useClass: RestDataSourceService,},
+    RestDataSourceService, AuthService]
 })
 export class ModelModule { }

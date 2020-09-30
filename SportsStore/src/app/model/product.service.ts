@@ -2,9 +2,7 @@ import { Injectable } from '@angular/core';
 import { Product } from './product';
 import { StaticDataSourceService } from './static-data-source';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class ProductRepository {
   private products: Product[] = [];
   private categories: string[] = [];
