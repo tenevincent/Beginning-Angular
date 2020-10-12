@@ -9,6 +9,8 @@ import { AppComponent } from './app.component';
 import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
 import {MatSidenavModule} from '@angular/material/sidenav';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import { MatMenuModule } from '@angular/material/menu';
 
 // Routing
  
@@ -19,11 +21,16 @@ import {MatSidenavModule} from '@angular/material/sidenav';
     AppComponent
   ],
   imports: [
+    AppRoutingModule,
     BrowserModule,
     MatButtonModule,
     BrowserAnimationsModule,
+
+    // Material
     MatIconModule,
     MatSidenavModule,
+    MatToolbarModule,
+    MatMenuModule,
     AppRoutingModule
   ],
   providers: [],
